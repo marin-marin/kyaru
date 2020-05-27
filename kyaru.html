@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>接 头 霸 王</title>
+</head>
+<body>
+  <div id="kyaru">
+    <fieldset>
+      <legend>选 择 受 害 者</legend>
+      <div class="selector-box">
+        <input type="file" id="selector" name="selector" id="" @change="fileUploaded">
+      </div>
+    </fieldset>
+    <fieldset>
+      <legend>选 择 臭 鼬 形 象</legend>
+      <section class="kyaru-heads">
+        <img 
+          v-for="head in heads" 
+          style="width: 60px; height: 60px;" 
+          :key="head" :src="'./heads/' + head + '.png'"
+          draggable @dragstart="dragStart" @dragEnd="dragEnd">
+      </section>
+    </fieldset>
+    <fieldset>
+      <legend>加 大 力 度</legend>
+      <canvas id="canvas" width="800" height="600" @drop.prevent="ondrop"></canvas>
+    </fieldset>
+  </div>
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="./kyaru.js"></script>
+</body>
+</html>
