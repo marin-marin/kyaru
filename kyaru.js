@@ -4,41 +4,52 @@ const app = new Vue({
     return {
       heads: [...new Array(39)].keys(),
       img: null,
-      draggingImg: null
+      draggingImg: null,
+      canvas: document.querySelector('canvas'),
+      ctx: document.querySelector('canvas').getContext('2d'),
+      fabricCanvas: null,
+      fabImg: null,
+      headImg: null
     }
   },
-  created () {
+  mounted () {
+    this.fabricCanvas = new fabric.Canvas('canvas')
+    this.fabricCanvas.ondrop
   },
   methods: {
-    fileUploaded () {
+    fileUploaded (e) {
       let file = document.querySelector('#selector').files[0]
       if (!~file.type.indexOf('image/')) {
         return alert('请选择受害者的图片')
       }
+      this.fabricCanvas.clear()
       let fr = new FileReader()
-      fr.readAsDataURL(file)
       fr.onload = () => {
         let img = new Image()
         img.src = fr.result
         this.img = img
-        Promise.resolve().then(() => {
-          this.drawImage(img)
+        let fabImg = new fabric.Image(img, {
+          top: 10,
+          left: 10,
+          width: img.width,
+          height: img.height
         })
+        this.fabImg = fabImg
+        this.fabricCanvas.setBackgroundImage(fabImg, this.fabricCanvas.renderAll.bind(this.fabricCanvas))
       }
+      fr.readAsDataURL(file)
+      e.target.value = null
     },
     setCanvasSize ({width, height}) {
-      const canvas = document.querySelector('#canvas')
-      canvas.style.width = width + 'px'
-      canvas.style.height = height + 'px'
+      this.canvas.width = width
+      this.canvas.height = height
     },
     drawImage (img, x = img.width, y = img.height) {
-      const canvas = document.querySelector('#canvas')
-      canvas.ondragover = (e) => {
+      this.canvas.ondragover = (e) => {
         e.preventDefault()
         return false
       }
-      const ctx = canvas.getContext('2d')
-      ctx.drawImage(img, 0, 0, x, y)
+      // this.ctx.drawImage(img, 0, 0, x, y)
     },
     dragStart (e) {
       this.draggingImg = e.target
@@ -46,12 +57,25 @@ const app = new Vue({
     dragEnd (e) {
       this.draggingImg = null
     },
-    dragOver (e) {
-      console.log(e)
-    },
     ondrop (e) {
       let { offsetX, offsetY } = e
-      this.drawImage(this.draggingImg, offsetX, offsetY)
+      let headImg = new fabric.Image(this.draggingImg, {
+        top: offsetY,
+        left: offsetX,
+      })
+      this.fabricCanvas.add(headImg)
+      this.headImg = headImg
+    },
+    clearKyaru () {
+      this.fabricCanvas.remove(this.headImg)
+      this.headImg = null
+    },
+    finishKyaru () {
+      this.fabricCanvas.toDataURL({
+        format: 'png',
+        width: this.fabImg.width,
+        height: this.fabImg.height
+      })
     }
   }
 })

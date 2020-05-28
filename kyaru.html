@@ -21,14 +21,19 @@
           style="width: 60px; height: 60px;" 
           :key="head" :src="'./heads/' + head + '.png'"
           draggable @dragstart="dragStart" @dragEnd="dragEnd">
+        <button @click="clearKyaru">换 个 臭 鼬</button>
       </section>
     </fieldset>
-    <fieldset>
+    <fieldset @drop.prevent="ondrop">
       <legend>加 大 力 度</legend>
-      <canvas id="canvas" width="800" height="600" @drop.prevent="ondrop"></canvas>
+      <canvas id="canvas" width="1024" height="768"></canvas>
+    </fieldset>
+    <fieldset>
+      <button @click="finishKyaru">完 成 迫 害</button>
     </fieldset>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="./fabric.min.js"></script>
   <script src="./kyaru.js"></script>
 </body>
 </html>

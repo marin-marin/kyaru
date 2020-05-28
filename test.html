@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+<body>
+  <canvas id="c" width="1000" height="900"></canvas>
+  <img src="./heads/0.png" width="200" height="200" id="my-image" hidden>
+  <script src="./fabric.js"></script>
+  <script>
+    var canvas = new fabric.Canvas('c');
+    var imgElement = document.getElementById('my-image');
+    var imgInstance = new fabric.Image(imgElement, {
+      left: 0,
+      top: 0,
+      angle: 30,
+      opacity: 0.85
+    });
+    canvas.add(imgInstance);
+  </script>
+</body>
+</html>
