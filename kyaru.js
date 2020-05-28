@@ -23,22 +23,24 @@ const app = new Vue({
         return alert('请选择受害者的图片')
       }
       this.fabricCanvas.clear()
-      let fr = new FileReader()
-      fr.onload = () => {
-        let img = new Image()
-        img.src = fr.result
-        this.img = img
-        let fabImg = new fabric.Image(img, {
-          top: 10,
-          left: 10,
-          width: img.width,
-          height: img.height
-        })
-        this.fabImg = fabImg
-        this.fabricCanvas.setBackgroundImage(fabImg, this.fabricCanvas.renderAll.bind(this.fabricCanvas))
-      }
-      fr.readAsDataURL(file)
-      e.target.value = null
+      setTimeout(() => {
+        let fr = new FileReader()
+        fr.onload = () => {
+          let img = new Image()
+          img.src = fr.result
+          this.img = img
+          let fabImg = new fabric.Image(img, {
+            top: 10,
+            left: 10,
+            width: img.width,
+            height: img.height
+          })
+          this.fabImg = fabImg
+          this.fabricCanvas.setBackgroundImage(fabImg, this.fabricCanvas.renderAll.bind(this.fabricCanvas))
+        }
+        fr.readAsDataURL(file)
+        e.target.value = null
+      })
     },
     setCanvasSize ({width, height}) {
       this.canvas.width = width
@@ -71,11 +73,18 @@ const app = new Vue({
       this.headImg = null
     },
     finishKyaru () {
-      this.fabricCanvas.toDataURL({
+      let url = this.fabricCanvas.toDataURL({
         format: 'png',
         width: this.fabImg.width,
         height: this.fabImg.height
       })
+      let a = document.createElement('a')
+      a.target = '_blank'
+      a.href = url
+      a.download = '接头霸王.png'
+      a.hidden = true
+      document.body.appendChild(a)
+      a.click()
     }
   }
 })
