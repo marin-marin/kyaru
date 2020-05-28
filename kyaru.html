@@ -4,17 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>接 头 霸 王</title>
+  <link rel="stylesheet" href="./kyaru.css">
 </head>
 <body>
   <div id="kyaru">
+    <section class="row-1">
+      <fieldset class="victim-field">
+        <legend>选 择 受 害 者</legend>
+        <div class="selector-box">
+          <input type="file" id="selector" name="selector" id="" @change="fileUploaded" accept="image/png,image/jpeg">
+        </div>
+      </fieldset>
+      <fieldset class="finish-field">
+        <legend>完 成 迫 害</legend>
+        <button class="finish-btn" @click="finishKyaru">キャル it！</button>
+      </fieldset>
+    </section>
     <fieldset>
-      <legend>选 择 受 害 者</legend>
-      <div class="selector-box">
-        <input type="file" id="selector" name="selector" id="" @change="fileUploaded" accept="image/png,image/jpeg">
-      </div>
-    </fieldset>
-    <fieldset>
-      <legend>选 择 臭 鼬 形 象</legend>
+      <legend>选 头</legend>
       <section class="kyaru-heads">
         <img 
           v-for="head in heads" 
@@ -25,10 +32,7 @@
     </fieldset>
     <fieldset @drop.prevent="ondrop">
       <legend>加 大 力 度</legend>
-      <canvas id="canvas" width="1024" height="768"></canvas>
-    </fieldset>
-    <fieldset>
-      <button @click="finishKyaru">完 成 迫 害</button>
+      <canvas id="canvas" width="800" height="600"></canvas>
     </fieldset>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>

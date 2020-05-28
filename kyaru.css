@@ -1,0 +1,23 @@
+#kyaru {
+
+}
+.row-1 {
+  display: flex;
+}
+.victim-field {
+  flex: 1;
+}
+.finish-field {
+  flex-basis: 120px;
+  text-align: center;
+}
+.finish-btn {
+  border: 1px solid #c15aee;
+  background: #ac73c5;
+  color: #fff;
+  cursor: pointer;
+  transition: background .3s;
+}
+.finish-btn:hover {
+  background: #c746ff;
+}

@@ -78,18 +78,22 @@ new Vue({
           let img = new Image()
           img.src = fr.result
           this.img = img
-          let fabImg = new fabric.Image(img, {
-            top: 10,
-            left: 10,
-            width: img.width,
-            height: img.height
-          })
-          this.fabImg = fabImg
-          this.fabricCanvas.setBackgroundImage(fabImg, this.fabricCanvas.renderAll.bind(this.fabricCanvas))
+          img.onload = () => {
+            let fabImg = new fabric.Image(img, {
+              top: 10,
+              left: 10,
+              width: img.width,
+              height: img.height
+            })
+            this.fabImg = fabImg
+            this.fabricCanvas.setBackgroundImage(fabImg, this.fabricCanvas.renderAll.bind(this.fabricCanvas))
+            this.fabricCanvas.setWidth(this.fabImg.width + 100)
+            this.fabricCanvas.setHeight(this.fabImg.height + 100)
+          }
         }
         fr.readAsDataURL(file)
         e.target.value = null
-      })
+      }, 10)
     },
     setCanvasSize ({width, height}) {
       this.canvas.width = width
