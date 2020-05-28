@@ -1,5 +1,4 @@
 var canvas = this.__canvas = new fabric.Canvas('c');
-// create a rect object
 var flipIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABWklEQVRYR+3XPUsdURDG8d/9CFa+VIKCjWCVRkU0kEIF0YQUdnZJaWVjYz5BSiGNvTYWgoWIIpgyhWjANJYBbS0tZOBcOCy73vV60cI9MCx7ds48f55TzGzLG6/WG+trAMocWMUfXPfwegbwBVc4zesWAX5iPSWc4TjFeRcww/iMFUxn58fwr/1eBDjBbInY3wwmoO4rgKL4YoqPFTlzuQtVAD/wCZMlRW6xj2/ZtylsYKmGU7UBtjCBhQQTB/MVAL/Sxi6+1hCPlGcBFGvOINyJa4pnQMaquroyphcB5GINQONA40DjQOPA+3NgBB9SG36VZhStNgTz6MvaW96Ot/G9l+34IAn3lxT9jaOsFUdK5G1iHqMdQGq142KNGCQDKoQvOggERDvKYJ4EWMNOEgjRPRzipqa9xbQY6ZbTYNqGGcL/qqE09gfxgLsuRauOjeOy+LH5M2oceAQNmIwhbwQKzQAAAABJRU5ErkJggg==";
 var deleteIcon = "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAABNElEQVRYR+2XsU4CQRCGv2t5AzttKOzsTZSWBzBQKZVPQK3WPAGVUkl4AFo0oaezoIGON6DFTLJnjsnt7Q135ih2utvbmf/LP7mdvYSGIzlB/xp4AO5U7jcwA34sNU8BeAeePCIfwOA/AS6BjRP4UkL37vkK2JaFsDogIgtXvAOkEL71IMfZAYyBdgA7tdrXAr2uy62B53RRO3AIelbPhj/dswMo04KqHhS2oGpxc771KzALhBJ8AF1gGEo2vh8Bc53jA3gFXowCoe1vgNQ9ighgdUCGzMR5qFskFks8AjK0dNTSAjlmZQhJyFDKHst561mICBAdiA5EB2pxoPGTMDTxit6bHOgBn1XUcnL7wLTsOG4BS+CmJogVcAvsywLIvgt3f9c/oVYm+WmVy+4uL7HxO+EvDoFqIaO0EOIAAAAASUVORK5CYII=";
 
@@ -104,7 +103,6 @@ new Vue({
         e.preventDefault()
         return false
       }
-      // this.ctx.drawImage(img, 0, 0, x, y)
     },
     dragStart (e) {
       this.draggingImg = e.target
@@ -132,12 +130,14 @@ new Vue({
         height: this.fabImg.height
       })
       let a = document.createElement('a')
+      a.className = 'download'
       a.target = '_blank'
       a.href = url
       a.download = '接头霸王.png'
       a.hidden = true
       document.body.appendChild(a)
       a.click()
+      document.body.removeChild(a)
     }
   }
 })
