@@ -21,7 +21,6 @@
           style="width: 60px; height: 60px;" 
           :key="head" :src="'./heads/' + head + '.png'"
           draggable @dragstart="dragStart" @dragEnd="dragEnd">
-        <button @click="clearKyaru">换 个 臭 鼬</button>
       </section>
     </fieldset>
     <fieldset @drop.prevent="ondrop">
@@ -33,7 +32,7 @@
     </fieldset>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="./fabric.min.js"></script>
+  <script src="./fabric.js"></script>
   <script src="./kyaru.js"></script>
 </body>
 </html>
