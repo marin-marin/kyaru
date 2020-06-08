@@ -1,0 +1,41 @@
+.row-1 {
+  display: flex;
+}
+.victim-field {
+  flex: 1;
+}
+.finish-field {
+  flex-basis: 120px;
+  text-align: center;
+}
+.finish-btn {
+  border: 1px solid #c15aee;
+  background: #ac73c5;
+  color: #fff;
+  cursor: pointer;
+  transition: background .3s;
+}
+.finish-btn:hover {
+  background: #c746ff;
+}
+.kyaru-heads {
+  overflow: hidden;
+  padding: 20px 5px;
+}
+
+.need-more-btn {
+  border: none;
+}
+
+.finish-btn--mobile {
+  display: block;
+  width: 96vw;
+  height: 2.5rem;
+  line-height: 2.5rem;
+  margin: 20px auto;
+  border: 1px solid #c15aee;
+  background: #ac73c5;
+  color: #fff;
+  cursor: pointer;
+  transition: background .3s;
+}

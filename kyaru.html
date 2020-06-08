@@ -4,7 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>接 头 霸 王</title>
-  <link rel="stylesheet" href="./kyaru.css">
+  <link rel="stylesheet" href="./assets/kyaru.css">
 </head>
 <body>
   <div id="kyaru">
@@ -15,28 +15,34 @@
           <input type="file" id="selector" name="selector" id="" @change="fileUploaded" accept="image/png,image/jpeg">
         </div>
       </fieldset>
-      <fieldset class="finish-field">
+      <fieldset class="finish-field" v-if="!isMobile">
         <legend>完 成 迫 害</legend>
         <button class="finish-btn" @click="finishKyaru">キャル it！</button>
       </fieldset>
     </section>
     <fieldset>
-      <legend>选 头</legend>
-      <section class="kyaru-heads">
+      <legend>选 头 <span v-if="!isMobile">(拖 到 受 害 者 头 上)</span></legend>
+      <section v-if="isMobile">
+        <button class="need-more-btn" @click="showMoreHead = !showMoreHead">{{showMoreHead ? '收起' : '需要更多的头...'}}</button>
+      </section>
+      <section class="kyaru-heads" v-show="!isMobile || showMoreHead">
         <img 
-          v-for="head in heads" 
+          v-for="head in heads"  crossorigin
           style="width: 60px; height: 60px;" 
-          :key="head" :src="'./heads/' + head + '.png'"
-          draggable @dragstart="dragStart" @dragEnd="dragEnd">
+          :key="head" :src="'http://www.marunhao.cn/kyaru/' + head + '.png'"
+          draggable @dragstart="dragStart" @dragEnd="dragEnd"
+          @click="mobileAddHead"
+        >
       </section>
     </fieldset>
-    <fieldset @drop.prevent="ondrop">
+    <fieldset @drop.prevent="ondrop" id="paintBox">
       <legend>加 大 力 度</legend>
-      <canvas id="canvas" width="800" height="600"></canvas>
+      <canvas id="canvas" :width="isMobile ? mobileCanvasWidth + '' : '800'" height="600"></canvas>
     </fieldset>
+    <button class="finish-btn--mobile" v-if="isMobile" @click="finishKyaru_mobile">迫 害 完 成!</button>
   </div>
   <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
-  <script src="./fabric.js"></script>
-  <script src="./kyaru.js"></script>
+  <script src="./assets/fabric.js"></script>
+  <script src="./dist/bundle.js"></script>
 </body>
 </html>
