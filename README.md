@@ -3,7 +3,7 @@
 
 > 寻找宿主的新古神...
 
-**Entry（イリクチ）**　https://www.marunhao.cn/kyaru
+**Entry（イリクチ）**　https://www.marinmarin.cn/kyaru
 
 **制作内容**
  1. html + js + vue(一丢丢)
